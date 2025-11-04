@@ -2,6 +2,16 @@
 
 Une application web de gestion de projets développée avec **Flask** et **SQLite**, permettant de gérer des utilisateurs, projets et tâches de manière collaborative.
 
+![Python](https://img.shields.io/badge/Python-3.8%2B-blue)
+![Flask](https://img.shields.io/badge/Flask-2.3%2B-lightgrey)
+![SQLite](https://img.shields.io/badge/SQLite-Database-green)
+![HTML5](https://img.shields.io/badge/HTML5-Markup-orange)
+![CSS3](https://img.shields.io/badge/CSS3-Styling-blue)
+![JavaScript](https://img.shields.io/badge/JavaScript-ES6%2B-yellow)
+![Bootstrap](https://img.shields.io/badge/Bootstrap-5.3-purple)
+![AJAX](https://img.shields.io/badge/AJAX-Async-green)
+![JSON](https://img.shields.io/badge/JSON-Data%20Format-lightblue)
+
 ---
 
 ## 📋 Table des Matières
@@ -185,5 +195,6 @@ Ce projet est développé dans un cadre académique.
 ---
 
 **⭐ N'hésitez pas à donner une étoie au projet si vous le trouvez utile !**
+
 
 
