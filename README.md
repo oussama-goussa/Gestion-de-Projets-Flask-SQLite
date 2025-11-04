@@ -1,7 +1,3 @@
-Voici un **README professionnel** avec des captures d'écran pour votre projet Flask et SQLite :
-
----
-
 # 🚀 Gestion de Projets - Version Flask & SQLite
 
 Une application web de gestion de projets développée avec **Flask** et **SQLite**, permettant de gérer des utilisateurs, projets et tâches de manière collaborative.
@@ -189,4 +185,5 @@ Ce projet est développé dans un cadre académique.
 ---
 
 **⭐ N'hésitez pas à donner une étoie au projet si vous le trouvez utile !**
+
 
