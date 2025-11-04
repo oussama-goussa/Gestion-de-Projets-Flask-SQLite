@@ -74,29 +74,16 @@ Une application web de gestion de projets développée avec **Flask** et **SQLit
 
 1. **Cloner le repository**
 ```bash
-git clone https://github.com/votre-username/Gestion-de-Projets.git
-cd Gestion-de-Projets/flask_gestion_projets
+git clone https://github.com/oussama-goussa/Gestion-de-Projets-Flask-SQLite.git
+cd Gestion-de-Projets-Flask-SQLite/App
 ```
 
-2. **Créer un environnement virtuel**
+2. **Lancer l'application**
 ```bash
-python -m venv venv
-source venv/bin/activate  # Linux/Mac
-# ou
-venv\Scripts\activate     # Windows
+flask run
 ```
 
-3. **Installer les dépendances**
-```bash
-pip install -r requirements.txt
-```
-
-4. **Lancer l'application**
-```bash
-python app.py
-```
-
-5. **Accéder à l'application**
+3. **Accéder à l'application**
 Ouvrez votre navigateur et allez sur : `http://localhost:5000`
 
 ---
@@ -104,7 +91,7 @@ Ouvrez votre navigateur et allez sur : `http://localhost:5000`
 ## 📁 Structure du Projet
 
 ```
-flask_gestion_projets/
+App/
 │
 ├── app.py                 # Point d'entrée principal
 ├── config.py              # Configuration Flask
@@ -195,6 +182,7 @@ Ce projet est développé dans un cadre académique.
 ---
 
 **⭐ N'hésitez pas à donner une étoie au projet si vous le trouvez utile !**
+
 
 
 
