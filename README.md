@@ -150,7 +150,7 @@ flask_gestion_projets/
 *Tableau de bord avec aperçu des tâches*
 
 ### 👥 Gestion des Utilisateurs
-![Gestion Utilisateurs](./screenshots/users/users-list.png)
+![Gestion Utilisateurs](./screenshots/users/users-list.png.png)
 *Interface de gestion des utilisateurs*
 
 ### 📊 Gestion des Projets
@@ -189,3 +189,4 @@ Ce projet est développé dans un cadre académique.
 ---
 
 **⭐ N'hésitez pas à donner une étoie au projet si vous le trouvez utile !**
+
