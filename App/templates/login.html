@@ -1,0 +1,33 @@
+<!-- login.html -->
+
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="center">
+    <div class="container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <ul class="messages">
+                {% for category, message in messages %}
+                <li class="{{ category }}">{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        {% endwith %}
+        
+        <h1 class="title" >Connexion</h1>
+        <form method="POST" action="{{ url_for('login.login') }}">
+            <label for="username">Nom d'utilisateur :</label>
+            <input type="text" id="username" name="username">
+            
+            <label for="password">Mot de passe :</label>
+            <input type="password" id="password" name="password">
+            
+            <button type="submit">Connexion</button>
+        </form>
+        <p class="redirect-link">Vous n'êtes pas membre? <a href="{{ url_for('register.register') }}">Inscription</a></p>
+    </div>
+</div>
+
+{% endblock %}

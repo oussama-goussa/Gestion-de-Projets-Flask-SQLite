@@ -1,0 +1,85 @@
+<!-- projet.html -->
+
+{% extends "base.html" %} {% block content %}
+<h2 class="list"><i class="fa-solid fa-diagram-project"></i>Ajouter un nouveau projet</h2>
+
+<!-- Affichage des messages flash -->
+{% if success %}
+<div class="alert alert-success">{{ success }}</div>
+{% endif %} {% if error %}
+<div class="alert alert-danger">{{ error }}</div>
+{% endif %}
+
+<form
+  class="form"
+  method="POST"
+  action="{{ url_for('projets.ajouter_projet') }}"
+>
+  <label for="nom">Nom du projet :</label>
+  <input type="text" id="nom" name="nom" required />
+
+  <label for="description">Description :</label>
+  <textarea id="description" name="description" required></textarea>
+
+  <label for="utilisateurs">Utilisateurs :</label>
+  <select name="utilisateur_ids" id="utilisateurs" multiple required>
+    {% for utilisateur in utilisateurs %}
+    <option value="{{ utilisateur.id }}">{{ utilisateur.nom }}</option>
+    {% endfor %}
+  </select>
+
+  <script>
+    $(document).ready(function () {
+      // Initialisation de Select2
+      $("#utilisateurs").select2({
+        placeholder: "   Sélectionner des utilisateurs",
+        allowClear: true, // Option pour désélectionner
+        width: "100%", // S'assurer que la largeur est bien ajustée
+      });
+    });
+  </script>
+
+  <button type="submit" class="sub-add"><i class="fa-solid fa-plus"></i>Ajouter Projet</button>
+</form>
+
+<h2 class="list"><i class="fa-solid fa-bars"></i>Liste des Projets</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Nom</th>
+      <th>Description</th>
+      <th>Utilisateurs</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for projet in projets %}
+    <tr>
+      <td>{{ projet.nom }}</td>
+      <td>{{ projet.description }}</td>
+      <td>
+        {% for utilisateur in projet.utilisateurs %} {{ utilisateur.nom }}
+        <!-- Affiche le nom de chaque utilisateur -->
+        {% if not loop.last %}, {% endif %}
+        <!-- Ajoute une virgule sauf pour le dernier utilisateur -->
+        {% endfor %}
+      </td>
+      <td>
+        <a
+          href="{{ url_for('projets.modifier_projet', id=projet.id) }}"
+          class="btn btn-success btn-sm"
+          ><i class="bi bi-pen-fill"></i>Modifier</a
+        >
+        <a
+          href="{{ url_for('projets.supprimer_projet', id=projet.id) }}"
+          onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce projet?')"
+          class="btn btn-danger btn-sm"
+          ><i class="bi bi-trash3-fill"></i>Supprimer</a
+        >
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

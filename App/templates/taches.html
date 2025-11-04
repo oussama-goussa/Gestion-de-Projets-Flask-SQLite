@@ -1,0 +1,132 @@
+<!-- tache.html -->
+
+{% extends "base.html" %} {% block content %}
+
+<h2 class="list"><i class="fa-solid fa-bars-progress"></i>Ajouter une nouvelle tâche</h2>
+
+<!-- Affichage des messages flash -->
+{% if success %}
+<div class="alert alert-success">{{ success }}</div>
+{% endif %} {% if error %}
+<div class="alert alert-danger">{{ error }}</div>
+{% endif %}
+
+<form class="form" method="POST" action="{{ url_for('taches.ajouter_tache') }}">
+  <label for="titre">Titre de la tâche :</label>
+  <input type="text" id="titre" name="titre" required />
+
+  <label for="description">Description :</label>
+  <textarea id="description" name="description" required></textarea>
+
+  <label for="statut">Statut :</label>
+  <select id="statut" name="statut" required>
+    <option value="À faire">À faire</option>
+    <option value="En cours">En cours</option>
+    <option value="Terminé">Terminé</option>
+  </select>
+
+  <label for="utilisateur_id">Utilisateur :</label>
+  <select id="utilisateur_id" name="utilisateur_id" required>
+    <option value="" selected disabled>
+      -- Sélectionnez un utilisateur --
+    </option>
+    {% for utilisateur in utilisateurs %}
+    <option value="{{ utilisateur.id }}">{{ utilisateur.nom }}</option>
+    {% endfor %}
+  </select>
+
+  <label for="projet_id">Projet :</label>
+  <select id="projet_id" name="projet_id" required>
+    <option value="" selected disabled>-- Sélectionnez un projet --</option>
+  </select>
+
+  <button type="submit" class="sub-add"><i class="fa-solid fa-plus"></i>Ajouter Tâche</button>
+</form>
+
+<h2 class="list"><i class="fa-solid fa-bars"></i>Liste des Tâches</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Titre</th>
+      <th>Description</th>
+      <th>Statut</th>
+      <th>Utilisateur</th>
+      <th>Projet</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for tache in taches %}
+    <tr>
+      <td>{{ tache.titre }}</td>
+      <td>{{ tache.description }}</td>
+      <td>
+        <span
+          class="status-indicator {{ tache.statut | lower | replace(' ', '-') }}"
+        >
+        </span>
+        {{ tache.statut }}
+      </td>
+      <td>{{ tache.utilisateur.nom }}</td>
+      <!-- Affichage du nom de l'utilisateur -->
+      <td>{{ tache.projet.nom }}</td>
+      <!-- Affichage du nom du projet -->
+      <td>
+        <a
+          href="{{ url_for('taches.modifier_tache', id=tache.id) }}"
+          class="btn btn-success btn-sm"
+          ><i class="bi bi-pen-fill"></i>Modifier</a
+        >
+        <a
+          href="{{ url_for('taches.supprimer_tache', id=tache.id) }}"
+          onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette tâche?')"
+          class="btn btn-danger btn-sm"
+          ><i class="bi bi-trash3-fill"></i>Supprimer</a
+        >
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<script>
+  // Écouteur d'événements sur le changement de sélection de l'utilisateur
+  document
+    .getElementById("utilisateur_id")
+    .addEventListener("change", function () {
+      const utilisateurId = this.value; // Récupère l'ID de l'utilisateur sélectionné
+      const projetSelect = document.getElementById("projet_id");
+
+      // Réinitialise les options de projets
+      projetSelect.innerHTML =
+        '<option value="" selected disabled>-- Sélectionnez un projet --</option>';
+
+      if (utilisateurId) {
+        // Appelle l'API pour récupérer les projets associés à cet utilisateur
+        fetch(`/taches/projets/${utilisateurId}`)
+          .then((response) => response.json())
+          .then((data) => {
+            // Ajoute les projets au champ de sélection
+            if (data.projets.length === 0) {
+              projetSelect.innerHTML =
+                '<option value="" disabled>Aucun projet trouvé</option>';
+            } else {
+              data.projets.forEach((projet) => {
+                const option = document.createElement("option");
+                option.value = projet.id;
+                option.textContent = projet.nom;
+                projetSelect.appendChild(option);
+              });
+            }
+          })
+          .catch((error) =>
+            console.error("Erreur lors de la récupération des projets:", error)
+          );
+      } else {
+        projetSelect.innerHTML =
+          '<option value="" selected disabled>-- Sélectionnez un projet --</option>';
+      }
+    });
+</script>
+{% endblock %}

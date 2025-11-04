@@ -1,0 +1,93 @@
+<!-- modifier_tache.html -->
+
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="center">
+        <div class="container-up">
+            
+            <form class="form" method="POST" action="{{ url_for('taches.modifier_tache', id=tache.id) }}">
+                <h2 class="up"><i class="fa-solid fa-square-pen"></i>Modifier la Tâche :</h2>
+                <label for="titre">Titre :</label>
+                <input type="text" id="titre" name="titre" value="{{ tache.titre }}" required>
+                
+                <label for="description">Description :</label>
+                <input type="text" id="description" name="description" value="{{ tache.description }}" required>
+                
+                <label for="statut">Statut :</label>
+                <select id="statut" name="statut" required>
+                    <option value="À faire" {% if tache.statut == 'À faire' %}selected{% endif %}>À faire</option>
+                    <option value="En cours" {% if tache.statut == 'En cours' %}selected{% endif %}>En cours</option>
+                    <option value="Terminé" {% if tache.statut == 'Terminé' %}selected{% endif %}>Terminé</option>
+                </select>
+        
+                <label for="utilisateur_id">Utilisateur :</label>
+                <select id="utilisateur_id" name="utilisateur_id" required>
+                    {% for utilisateur in utilisateurs %}
+                        <option value="{{ utilisateur.id }}" {% if utilisateur.id == tache.utilisateur.id %}selected{% endif %}>
+                            {{ utilisateur.nom }}
+                        </option>
+                    {% endfor %}
+                </select>
+        
+                <label for="projet_id">Projet :</label>
+                <select id="projet_id" name="projet_id" required>
+                    <option value="" selected disabled>-- Sélectionnez un projet --</option>
+                    {% for projet in projets %}
+                        <option value="{{ projet.id }}" {% if projet.id == tache.projet.id %}selected{% endif %}>
+                            {{ projet.nom }}
+                        </option>
+                    {% endfor %}
+                </select>
+        
+                <button type="submit" class="btn-up">Modifier la tâche</button>
+
+                <a href="{{ url_for('taches.lister_taches') }}" class="btn-retour"><i class="fa-solid fa-arrow-rotate-left"></i>Retourner</a>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Écouteur d'événements sur le changement de sélection de l'utilisateur
+        document.getElementById('utilisateur_id').addEventListener('change', function() {
+            const utilisateurId = this.value; // Récupère l'ID de l'utilisateur sélectionné
+            const projetSelect = document.getElementById('projet_id');
+            
+            // Réinitialise les options de projets
+            projetSelect.innerHTML = '<option value="" selected disabled>-- Sélectionnez un projet --</option>';
+
+            if (utilisateurId) {
+                // Appelle l'API pour récupérer les projets associés à cet utilisateur
+                fetch(`/taches/projets/${utilisateurId}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        // Ajoute les projets au champ de sélection
+                        if (data.projets.length === 0) {
+                            projetSelect.innerHTML = '<option value="" disabled>Aucun projet trouvé</option>';
+                        } else {
+                            data.projets.forEach(projet => {
+                                const option = document.createElement('option');
+                                option.value = projet.id;
+                                option.textContent = projet.nom;
+                                projetSelect.appendChild(option);
+                            });
+
+                            // Assurez-vous que le projet actuellement assigné à la tâche est sélectionné
+                            projetSelect.value = "{{ tache.projet.id }}";
+                        }
+                    })
+                    .catch(error => console.error('Erreur lors de la récupération des projets:', error));
+            } else {
+                projetSelect.innerHTML = '<option value="" selected disabled>-- Sélectionnez un projet --</option>';
+            }
+        });
+
+        // Pré-sélectionner les projets associés à l'utilisateur sélectionné
+        document.addEventListener('DOMContentLoaded', function() {
+            const utilisateurId = document.getElementById('utilisateur_id').value;
+            if (utilisateurId) {
+                document.getElementById('utilisateur_id').dispatchEvent(new Event('change'));
+            }
+        });
+    </script>
+{% endblock %}

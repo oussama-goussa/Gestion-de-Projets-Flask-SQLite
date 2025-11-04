@@ -1,0 +1,36 @@
+flask_gestion_projets/
+│
+├── app.py                  # Point d'entrée principal de l'application
+├── config.py               # Configuration de l'application Flask
+├── routes/
+│   ├── __init__.py         # Init pour les routes
+│   ├── projets.py          # Routes liées aux projets
+│   ├── utilisateurs.py     # Routes liées aux utilisateurs
+│   ├── taches.py           # Routes liées aux tâches
+│
+├── models/
+│   ├── __init__.py         # Init pour les modèles
+│   ├── utilisateur.py      # Modèle Utilisateur
+│   ├── projet.py           # Modèle Projet
+│   ├── tache.py            # Modèle Tâche
+│   ├── db.py               # Modèle Tâche
+│
+├── utils/
+│   ├── __init__.py         # Init pour les utilitaires
+│   ├── gestion_fichiers.py # Gestion des fichiers JSON (sauvegarde/chargement)
+│
+├── templates/              # Dossier pour les fichiers HTML
+│   ├── base.html           # Template de base
+│   ├── index.html          # Page d'accueil
+│   ├── projets.html        # Page de gestion des projets
+│   ├── utilisateurs.html   # Page de gestion des utilisateurs
+│   ├── taches.html         # Page de gestion des taches
+│
+├── static/                 # Dossier pour les fichiers statiques
+│   ├── css/
+│   │   ├── style.css       # Fichier CSS principal
+│   ├── js/
+│   │   ├── script.js       # Fichier JavaScript principal
+│   ├── img/                # Images statiques
+│
+└── projets.json            # Fichier JSON des données de projet

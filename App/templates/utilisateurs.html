@@ -1,0 +1,68 @@
+<!-- utilisateurs.html -->
+
+{% extends "base.html" %} {% block content %}
+<h2 class="list"><i class="fa-solid fa-user-tie"></i>Ajouter un nouvel utilisateur</h2>
+
+<!-- Affichage des messages flash -->
+{% if success %}
+<div class="alert alert-success">
+    {{ success }}
+</div>
+{% endif %}
+
+{% if error %}
+<div class="alert alert-danger">
+    {{ error }}
+</div>
+{% endif %}
+
+<div class="form-container">
+  <form
+    method="POST"
+    action="{{ url_for('utilisateurs.ajouter_utilisateur') }}"
+  >
+    <div class="form-row">
+      <label for="nom">Nom :</label>
+      <input type="text" id="nom" name="nom" required />
+
+      <label for="email">Email :</label>
+      <input type="email" id="email" name="email" required />
+
+      <button type="submit" class="sub-add"><i class="fa-solid fa-plus"></i>Ajouter Utilisateur</button>
+    </div>
+  </form>
+</div>
+
+<h2 class="list"><i class="fa-solid fa-bars"></i>Liste des Utilisateurs</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Nom</th>
+      <th>Email</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for utilisateur in utilisateurs %}
+    <tr>
+      <td>{{ utilisateur.nom }}</td>
+      <td>{{ utilisateur.email }}</td>
+      <td>
+        <a
+          href="{{ url_for('utilisateurs.modifier_utilisateur', id=utilisateur.id) }}"
+          class="btn btn-success btn-sm"
+          ><i class="bi bi-pen-fill"></i>Modifier</a
+        >
+        <a
+          href="{{ url_for('utilisateurs.supprimer_utilisateur', id=utilisateur.id) }}"
+          onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur?')"
+          class="btn btn-danger btn-sm"
+          ><i class="bi bi-trash3-fill"></i>Supprimer</a
+        >
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

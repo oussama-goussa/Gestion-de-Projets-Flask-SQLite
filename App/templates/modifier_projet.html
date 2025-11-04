@@ -1,0 +1,43 @@
+<!-- modifier_projet.html -->
+
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="center">
+        <div class="container-up">
+            
+            <form class="form" method="POST" action="{{ url_for('projets.modifier_projet', id=projet.id) }}">
+                <h2 class="up"><i class="fa-solid fa-square-pen"></i>Modifier le Projet :</h2>
+                <label for="nom">Nom :</label>
+                <input type="text" id="nom" name="nom" value="{{ projet.nom }}" required>
+                
+                <label for="description">Description :</label>
+                <input type="text" id="description" name="description" value="{{ projet.description }}" required>
+        
+                <label for="utilisateurs">Utilisateurs :</label>
+                <select name="utilisateur_ids" id="utilisateurs" multiple required>
+                    {% for utilisateur in utilisateurs %}
+                        <option value="{{ utilisateur.id }}" 
+                                {% if utilisateur in projet.utilisateurs %} selected {% endif %}>
+                            {{ utilisateur.nom }}
+                        </option>
+                    {% endfor %}
+                </select>
+                <script>
+                    $(document).ready(function() {
+                        // Initialisation de Select2
+                        $('#utilisateurs').select2({
+                            placeholder: "   Sélectionner des utilisateurs",
+                            allowClear: true, // Option pour désélectionner
+                            width: '100%' // S'assurer que la largeur est bien ajustée
+                        });
+                    });
+                </script>
+                <button type="submit" class="btn-up">Modifier le projet</button>
+
+                <a href="{{ url_for('projets.lister_projets') }}" class="btn-retour"><i class="fa-solid fa-arrow-rotate-left"></i>Retourner</a>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}

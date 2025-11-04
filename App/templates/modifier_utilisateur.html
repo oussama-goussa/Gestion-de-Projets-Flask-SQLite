@@ -1,0 +1,22 @@
+<!-- modifier_utilisateur.html -->
+
+{% extends "base.html" %}
+
+{% block content %}
+<div class="center">
+    <div class="container-up">
+        <form class="form" method="POST" action="{{ url_for('utilisateurs.modifier_utilisateur', id=utilisateur.id) }}">
+            <h2 class="up"><i class="fa-solid fa-square-pen"></i>Modifier l'utilisateur :</h2>
+            <label for="nom">Nom :</label>
+            <input type="text" id="nom" name="nom" value="{{ utilisateur.nom }}" required>
+            
+            <label for="email">Email :</label>
+            <input type="email" id="email" name="email" value="{{ utilisateur.email }}" required>
+            
+            <button type="submit" class="btn-up">Mettre à jour l'utilisateur</button>
+
+            <a href="{{ url_for('utilisateurs.lister_utilisateurs') }}" class="btn-retour"><i class="fa-solid fa-arrow-rotate-left"></i>Retourner</a>
+        </form>
+    </div>
+</div>
+{% endblock %}

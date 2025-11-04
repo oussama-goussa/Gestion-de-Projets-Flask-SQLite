@@ -1,0 +1,70 @@
+<!-- index.html -->
+
+{% extends "base.html" %} {% block content %}
+
+<div class="welcome-container">
+  <!-- Texte de bienvenue -->
+  <div class="welcome-text">
+    <h2 class="gand-text"><i class="fa-solid fa-door-open"></i>Bienvenue {{ username }}!</h2>
+    <p class="sous-text">
+      Cette application vous permet de gérer des projets, des utilisateurs et
+      des tâches de manière efficace.
+    </p>
+  </div>
+
+  <!-- Image à droite -->
+  <img
+    src="{{ url_for('static', filename='images/logo3.webp') }}"
+    alt="Bienvenue"
+    class="welcome-image"
+  />
+</div>
+<!-- Vue d'ensemble -->
+<div class="overview-container">
+  <div class="overview-card-1">
+    <h3>À faire</h3>
+    <p>{{ stats['a_faire'] }} Tâches</p>
+  </div>
+  <div class="overview-card-2">
+    <h3>En cours</h3>
+    <p>{{ stats['en_cours'] }} Tâches</p>
+  </div>
+  <div class="overview-card-3">
+    <h3>Terminé</h3>
+    <p>{{ stats['termine'] }} Tâches</p>
+  </div>
+</div>
+
+<!-- Messages flash -->
+{% with messages = get_flashed_messages(with_categories=True) %} {% if messages
+  %}
+  <div class="flash-messages">
+    {% for category, message in messages %}
+    <div class="alert alert-{{ category }}">{{ message }}</div>
+    {% endfor %}
+  </div>
+  {% endif %} {% endwith %}
+
+<!-- Boutons pour sauvegarder et charger -->
+<div class="action-buttons">
+  <form method="POST" action="{{ url_for('home.sauvegarder') }}">
+    <button type="submit" class="btn btn-primary"><i class="fa-solid fa-file-export"></i>
+      Sauvegarder les données dans JSON
+    </button>
+  </form>
+  <form method="POST" action="{{ url_for('home.charger') }}">
+    <button type="submit" class="btn btn-secondary"><i class="fa-solid fa-file-import"></i>
+      Charger les données depuis JSON
+    </button>
+  </form>
+</div>
+<!--
+        <nav>
+        <ul>
+            <li><a href="{{ url_for('projets.lister_projets') }}">Voir les Projets</a></li>
+            <li><a href="{{ url_for('utilisateurs.lister_utilisateurs') }}">Voir les Utilisateurs</a></li>
+            <li><a href="{{ url_for('taches.lister_taches') }}">Voir les Tâches</a></li>
+        </ul>
+        </nav>
+    -->
+{% endblock %}

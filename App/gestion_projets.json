@@ -1,0 +1,84 @@
+{
+    "projets": [
+        {
+            "nom": "E-commerce",
+            "description": "Création d'une plateforme pour les achats en ligne.",
+            "taches": [
+                {
+                    "titre": "Développement du panier",
+                    "description": "Ajouter la fonctionnalité de gestion des produits dans le panier.",
+                    "statut": "Terminé",
+                    "utilisateur": {
+                        "nom": "Oussama GOUSSA",
+                        "email": "oussamagoussa032@gmail.com"
+                    }
+                }
+            ],
+            "utilisateurs": [
+                {
+                    "nom": "Oussama GOUSSA",
+                    "email": "oussamagoussa032@gmail.com"
+                },
+                {
+                    "nom": "Omar ALAL",
+                    "email": "omaralal@gmail.com"
+                },
+                {
+                    "nom": "Sana",
+                    "email": "sana09@gmail.com"
+                }
+            ]
+        },
+        {
+            "nom": "Gestion Scolaire",
+            "description": "Développement d'une application pour gérer les inscriptions et les cours.",
+            "taches": [
+                {
+                    "titre": "Créer une base de données",
+                    "description": "Modelisation des tables pour les etudiants et les cours.",
+                    "statut": "En cours",
+                    "utilisateur": {
+                        "nom": "Ahmed CHEK",
+                        "email": "ahmed@gmail.com"
+                    }
+                }
+            ],
+            "utilisateurs": [
+                {
+                    "nom": "Ahmed CHEK",
+                    "email": "ahmed@gmail.com"
+                },
+                {
+                    "nom": "Ali Ben KADI",
+                    "email": "ali09@gmail.com"
+                },
+                {
+                    "nom": "Omar ALAL",
+                    "email": "omaralal@gmail.com"
+                }
+            ]
+        }
+    ],
+    "utilisateurs": [
+        {
+            "nom": "Ahmed CHEK",
+            "email": "ahmed@gmail.com"
+        },
+        {
+            "nom": "Oussama GOUSSA",
+            "email": "oussamagoussa032@gmail.com"
+        },
+        {
+            "nom": "Ali Ben KADI",
+            "email": "ali09@gmail.com"
+        },
+        {
+            "nom": "Omar ALAL",
+            "email": "omaralal@gmail.com"
+        },
+        {
+            "nom": "Sana",
+            "email": "sana09@gmail.com"
+        }
+    ]
+}
